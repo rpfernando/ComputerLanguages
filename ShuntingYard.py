@@ -9,9 +9,11 @@ class ShuntingYard:
 		
 	def __init__(self, re):
 		self.tokenFunction = ( ',' )
-		self.tokenSeparator =  ( '(' , ')' )
+		#self.tokenSeparator =  ( Opening:'(', Ending:')' )
+		self.tokenSeparator =  ( '(', ')' )
 		self.re = re
 		self.tokens = self.toTokenList(re)
+		self.rpn = self.toRPN(self.tokens)
 
 	def toTokenList(self, re):
 		TokenList = [re]
@@ -35,10 +37,31 @@ class ShuntingYard:
 			aux = []
 		return TokenList
 
+	def toRPN(self, tokens):
+		cola = []
+		pila = []
+		for t in tokens:
+			if t in self.tokenFunction:
+				pila.append(t)
+			elif t in self.tokenSeparator:
+				if t == self.tokenSeparator[0]:
+					pila.append(t)
+				else:
+					auxT = pila.pop()
+					while auxT != self.tokenSeparator[0] :
+						cola.append(auxT)
+						auxT = pila.pop()
+			else:
+				cola.append(t)
+		while len(pila) != 0:
+			cola.append(pila.pop())
+		return cola
+
 
 
 exp = "(hola, hey) como (estas,te va)"
-
+tok = ['(','hola',',',' hey',')',' como ', '(', 'estas', ',', 'te va', ')']
 sy = ShuntingYard(exp)
-for i in sy.tokens:
+rpn = sy.toRPN(tok)
+for i in rpn:
 	print i
