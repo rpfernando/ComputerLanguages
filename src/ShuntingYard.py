@@ -51,10 +51,9 @@ class ShuntingYard:
 				else:
 					if not self.tokenSeparator['Opening'] in pila:
 						raise SyntaxError('Parentesis incompletos')
-					auxT = pila.pop()
-					while auxT != self.tokenSeparator['Opening']:
-						cola.append(auxT)
-						auxT = pila.pop()
+					while pila[-1] != self.tokenSeparator['Opening']:
+						cola.append(pila.pop())
+					pila.pop()
 			else:
 				cola.append(t)
 
