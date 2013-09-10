@@ -3,14 +3,14 @@
 		Also to convert the RE to RPN.
 
 """
-
+from Global import *
 
 class ShuntingYard:
 		
 	def __init__(self, re):
-		self.tokenFunction = { 'Union':',', 'Link':'@'}
-		self.tokenFunctionValue =  { ',': 1, '@': 0, '(' : 5}
-		self.tokenSeparator =  { 'Opening':'(', 'Ending':')' }
+		self.tokenFunction = Global.tokenFunction
+		self.tokenFunctionValue =  Global.tokenFunctionValue
+		self.tokenSeparator =  Global.tokenSeparator
 		self.re = re
 		self.tokens = self.toTokenList(re)
 		self.rpn = self.toRPN(self.tokens)
@@ -63,7 +63,6 @@ class ShuntingYard:
 		while len(pila) != 0:
 			cola.append(pila.pop())
 		return cola
-
 
 
 exp = "(hola, hey) como (estas,te va)"
