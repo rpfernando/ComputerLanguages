@@ -17,6 +17,9 @@ class Node:
 		self.char = char
 		self.left = left
 		self.rigth = rigth
+		self.is_function = False
+		if char in Global.all_token_function.values():
+			self.is_function = True
 
 	def __str__(self):
 		s = ""
