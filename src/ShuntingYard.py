@@ -24,7 +24,7 @@ class Node:
 			s += str(self.rigth)
 		if self.left != None:
 			s += str(self.left)
-		s += self.char + ' '
+		s += '\'' + self.char  + '\', '
 		return s
 
 def create_tree(rpn):
@@ -36,6 +36,10 @@ def create_tree(rpn):
 			if len(pila) < 2:
 				raise SyntaxError('Faltan operandos')
 			pila.append(Node(token,pila.pop(),pila.pop()))
+		elif token in Global.token_unary_function.values():
+			if len(pila) < 1:
+				raise SyntaxError('Faltan operandos')
+			pila.append(Node(token,pila.pop()))
 		else:
 			pila.append(Node(token))
 	if len(pila) > 1:
@@ -54,7 +58,7 @@ def to_token_list(re):
 			continue
 		if token_list[i] in Global.token_function.values():
 			continue
-		if token_list[i+1] in Global.token_function.values():
+		if token_list[i+1] in Global.all_token_function.values():
 			continue
 		token_list.insert(i+1,Global.token_function['Link'])
 
@@ -100,9 +104,10 @@ def to_rpn(tokens):
 		cola.append(pila.pop())
 	return cola
 
-
+"""
 #exp = "(hola, hey) como (estas,te va)"
 exp = "abc,ba,b"
 rpn = to_rpn(exp)
 print rpn
 print create_tree(rpn)
+"""
