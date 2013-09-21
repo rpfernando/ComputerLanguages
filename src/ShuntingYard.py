@@ -13,18 +13,18 @@ class ShuntingYard:
 		self.rpn = to_rpn(self.tokens)
 
 class Node:
-	def __init__(self, char, left=None, rigth=None):
+	def __init__(self, char, left=None, right=None):
 		self.char = char
 		self.left = left
-		self.rigth = rigth
+		self.right = right
 		self.is_function = False
 		if char in Global.all_token_function.values():
 			self.is_function = True
 
 	def __str__(self):
 		s = ""
-		if self.rigth != None:
-			s += str(self.rigth)
+		if self.right != None:
+			s += str(self.right)
 		if self.left != None:
 			s += str(self.left)
 		s += '\'' + self.char  + '\', '
