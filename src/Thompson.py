@@ -26,6 +26,8 @@ class State:
 
 	def update_closure(self):
 		for s1 in self.closure:
+			if s1 != self:
+				s1.update_closure()
 			for s2 in s1.closure:
 				if not s2 in self.closure:
 					self.closure.append(s2)

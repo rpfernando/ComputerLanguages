@@ -45,19 +45,19 @@ def create_AFND(re):
 				origin.add_transition(simbol.char, a)
 				#Descomentar la siguiente linea de codigo permite ver todas las transiciones generadas
 				#print origin, "--" + str(simbol.char) + "-->", a
-				#print orifin, simbol, a
+				#print origin, simbol, a
 
 	for state in automaton:
 		automaton[state].update_closure()
 
 	return automaton
 		
-
-r = "((hola, hey) como (estas,te va)),&"
+"""
+r = "2*((01)*(0,&),(10)*(1,&))"
 #r = "(ab,c)*,(de+,fg*)+"
 #r = "a(b*)(c(d))"
 #r = "(a*)+**"
 automata = create_AFND(r)
 
-print check_string(automata, "")
-	
+print check_string(automata, "	")
+"""
