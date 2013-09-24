@@ -15,7 +15,7 @@ article {
 	margin-top: -250px;
 	margin-left: -200px;
 }
-div, button {
+div, input.center-title {
 	background: #A7876B;
 	/* 0064AA azul
 		3C841D verde*/
@@ -26,13 +26,13 @@ div, button {
 	border-radius: 5px;
 	text-align: center;
 }
-div.center-title, button.center-title {
+div.center-title, input.center-title {
 	width: 400px;
 	margin-left: -200px;
 	margin-top: -15px;
 	font: 30px Menlo, Monaco, Consolas;
 }
-input {
+input, textarea {
 	position: relative;
 	left: 50%;
 	border-radius: 5px;
@@ -44,13 +44,14 @@ input.re {
 	font-size: 15px;
 	text-align: center;
 }
-input.text {
+textarea {
 	width: 800px;
 	margin-left: -400px;
 	height: 400px;
 	text-align: justify;
 	font-size: 12px;
 	border-radius:  10px;
+	resize: none;
 }
 img {
 	transform:rotate(-30deg);

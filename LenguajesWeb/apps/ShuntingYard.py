@@ -69,8 +69,7 @@ def to_token_list(re):
 
 	# This metod convert the prefix notation to postfis notation (rpn).
 def to_rpn(tokens):
-	if isinstance(tokens, str):
-		tokens = to_token_list(tokens)
+	tokens = to_token_list(tokens)
 	cola = []
 	pila = []
 	tokens.insert(0,Global.token_separator['Opening'])
@@ -107,10 +106,3 @@ def to_rpn(tokens):
 		cola.append(pila.pop())
 	return cola
 
-"""
-#exp = "(hola, hey) como (estas,te va)"
-exp = "abc,ba,b"
-rpn = to_rpn(exp)
-print rpn
-print create_tree(rpn)
-"""
