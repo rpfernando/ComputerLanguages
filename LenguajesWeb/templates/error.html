@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 	<head>
-		<title>Regular Expresions</title>
+		<title>Regular Expresions: ERROR</title>
 		<meta charset = "UTF-8" >
 		<link rel="stylesheet" href="css/basic.css" media="all">
 		<script type="text/javascript">
@@ -10,9 +10,13 @@
 	<body>
 		<img src="{{ url_for('static', filename='img/background.png') }}">
 		<article>
-			<h1 style = "text-align:center; color:red" > Error 2214124251821 </h1>
-			<h1>tu cosa no sirve, metela otra vez </h1>
-			<br>
+			{% if error %}
+				<h1 style = "text-align:center; color:red;" > Error:  </h1>
+				<br>
+				<h2 style = "text-align:center;"> {{ error }} </h2>
+			{%else%}
+				<h2 style = "text-align:center;"> There has beeen a mistake please go back </h2>
+			{% endif %}
 			
 		</article>
 	</body>
