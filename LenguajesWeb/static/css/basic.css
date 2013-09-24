@@ -50,6 +50,7 @@ input.text {
 	height: 400px;
 	text-align: justify;
 	font-size: 12px;
+	border-radius:  10px;
 }
 img {
 	transform:rotate(-30deg);
