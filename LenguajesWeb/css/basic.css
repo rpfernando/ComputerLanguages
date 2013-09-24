@@ -1,0 +1,61 @@
+/*Colors from: http://www.colourlovers.com/palette/475875/Gentle_Waves;
+						http://www.colourlovers.com/color/71B5EA/sky_in_its_glory
+						http://www.colourlovers.com/palette/65607/bent_not_broken*/
+body {
+	background: #E4DBCF;
+	/*71B5EA azul
+		BFE1B1 verde
+		E4DBCF grisecito
+		verdesito C3DBB4*/
+}
+article {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -250px;
+	margin-left: -200px;
+}
+div, button {
+	background: #A7876B;
+	/* 0064AA azul
+		3C841D verde*/
+	position: relative;
+	left: 50%;
+	top: 50%;
+	border: 1px ;
+	border-radius: 5px;
+	text-align: center;
+}
+div.center-title, button.center-title {
+	width: 400px;
+	margin-left: -200px;
+	margin-top: -15px;
+	font: 30px Menlo, Monaco, Consolas;
+}
+input {
+	position: relative;
+	left: 50%;
+	border-radius: 5px;
+	font-family: 'Raleway', sans-serif;
+}
+input.re {
+	width: 394px;
+	margin-left: -197px;
+	font-size: 15px;
+	text-align: center;
+}
+input.text {
+	width: 800px;
+	margin-left: -400px;
+	height: 400px;
+	text-align: justify;
+	font-size: 12px;
+}
+img {
+	transform:rotate(-30deg);
+    -ms-transform:rotate(-30deg); /* IE 9 */
+    -webkit-transform:rotate(-30deg); /* Safari and Chrome */
+    width: 60%;
+    position: absolute;
+    margin-top: -10%;
+}

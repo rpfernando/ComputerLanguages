@@ -33,8 +33,10 @@ def create_AFND(re):
 
 	while len(deltas) > 0:
 		(origin, simbol) = deltas.pop()
+		
 		if not origin in automaton.values():
 			automaton.setdefault(origin.name, origin)
+
 		if simbol.is_function:
 			aux_deltas = Thompson.generic(origin, simbol)
 			for t in aux_deltas:
