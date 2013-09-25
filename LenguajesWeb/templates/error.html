@@ -2,18 +2,14 @@
 	<head>
 		<title>Regular Expresions: ERROR</title>
 		<meta charset = "UTF-8" >
-		<link rel="stylesheet" href="css/basic.css" media="all">
-		<script type="text/javascript">
-
-		</script>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}" media="all">
 	</head>
 	<body>
 		<img src="{{ url_for('static', filename='img/background.png') }}">
 		<article>
-			{% if error %}
+			{% if e %}
 				<h1 style = "text-align:center; color:red;" > Error:  </h1>
-				<br>
-				<h2 style = "text-align:center;"> {{ error }} </h2>
+				<h2 style = "text-align:center;"> {{ e }} </h2>
 			{%else%}
 				<h2 style = "text-align:center;"> There has beeen a mistake please go back </h2>
 			{% endif %}

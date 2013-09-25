@@ -1,9 +1,19 @@
- 
-<table border = 1>
+ <!DOCTYPE html>
+    <head>
+        <title>Regular Expresions</title>
+        <meta charset = "UTF-8" >
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}" media="all">
+    </head>
+    <body>
+        <img src="{{ url_for('static', filename='img/background.png') }}">
+        <article>
+        <h1>Regular Expresion: {{re}}</h1>
+        <h1>Tabla de coincidencias:</h1>
+        <table border = 1>
             <tr>
-                <td>Inicial</td>
-                <td>Final</td>
-                <td>Patron</td>
+                <td><b>Inicial</b></td>
+                <td><b>Final  </b></td>
+                <td><b>Patron </b></td>
             </tr>
             {% for i,f,s in found %}
             <tr>
@@ -13,4 +23,29 @@
             </tr>
             {% endfor %}
         </table>
+        <h1>Tabla de transiciones:</h1>
+        <table border = 1   >
+            <tr>
+                <td>Estado</td>
+                {% for i in simbols %}
+                <td>{{i}}</td>
+                {% endfor %}
+            </tr>
+            {% for s in states: %}
+            <tr>
+                <td>{{s.name}}</td>
+                {% for i in simbols %}
+                    <td> {% for k in s.delta(i) %}
+                            {{k.name}},&#32;
+                         {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        </article>
+    </body>
+</html>
+
+
 

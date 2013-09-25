@@ -61,3 +61,16 @@ img {
     position: absolute;
     margin-top: -10%;
 }
+h1 {
+	font: 30px Menlo, Monaco, Consolas;
+	text-align: center;
+}
+h2 {
+	font: 20px Menlo, Monaco, Consolas;
+	text-align: right;
+}
+table {
+	position: relative;
+	left: 20%;
+	text-align: center;	
+}

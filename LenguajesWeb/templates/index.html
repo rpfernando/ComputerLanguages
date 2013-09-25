@@ -3,17 +3,6 @@
 		<title>Regular Expresions</title>
 		<meta charset = "UTF-8" >
 		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}" media="all">
-		<script type="text/javascript">
-			function openWindow(){
-				var re_text = document.getElementById('re-text');
-				var document_text =  document.getElementById('document-text');
-				if(re_text.value == "") {
-					window.open('/error/');
-				} else {
-					window.open('/cosas/' + re_text.value + '/' + document_text.value ,'_blank');
-				}
-			}
-		</script>
 	</head>
 	<body>
 		<img src="{{ url_for('static', filename='img/background.png') }}">
