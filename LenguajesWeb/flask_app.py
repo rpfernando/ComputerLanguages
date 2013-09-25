@@ -25,7 +25,7 @@ def error():
     e = request.form['error']
     return render_template('error',e=e)
 
-@app.route('/cosas', methods=['POST'])
+@app.route('/tables', methods=['POST'])
 def cosas():
     re = request.form['regex']
     text = request.form['text']
