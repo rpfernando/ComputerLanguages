@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-	<head>
-		<title>Regular Expresions</title>
-		<meta charset = "UTF-8" >
-		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}" media="all">
-	</head>
-	<body>
-		<img src="{{ url_for('static', filename='img/background.png') }}">
-		<article>
+{% extends "base.html" %}
+	{% block content %}
 		<form id = "info" method="post" action="/tables">
 			<input type="submit" class = "center-title" value="Regular Expresion">
 			<br>
@@ -17,6 +10,4 @@
 			<br>
 			<br>
 		</form>
-		</article>
-	</body>
-</html>
+	{% endblock %}		

@@ -1,34 +1,18 @@
- <!DOCTYPE html>
-    <head>
-        <title>Regular Expresions</title>
-        <meta charset = "UTF-8" >
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}" media="all">
-    </head>
-    <body>
-        <img src="{{ url_for('static', filename='img/background.png') }}">
-        <article>
-        <h1>Regular Expresion: {{re}}</h1>
-        <h1>Tabla de coincidencias:</h1>
+{% extends "base.html" %}
+    
+    {% block title %}
+        - Table
+    {% endblock %}
+
+    {% block content %}
+        <h1><strong>Regular Expresion:</strong> {{re}}</h1>
+
+        <h1><strong>Transitions:</strong></h1>
         <table border = 1>
             <tr>
-                <td><b>Inicial</b></td>
-                <td><b>Final  </b></td>
-                <td><b>Patron </b></td>
-            </tr>
-            {% for i,f,s in found %}
-            <tr>
-                <td>{{i}}</td>
-                <td>{{f}}</td>
-                <td>{{s}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <h1>Tabla de transiciones:</h1>
-        <table border = 1   >
-            <tr>
-                <td>Estado</td>
+                <td><b>State</b></td>
                 {% for i in simbols %}
-                <td>{{i}}</td>
+                <td><b>{{i}}</b></td>
                 {% endfor %}
             </tr>
             {% for s in states: %}
@@ -43,9 +27,20 @@
             </tr>
             {% endfor %}
         </table>
-        </article>
-    </body>
-</html>
 
-
-
+        <h1><strong>Matches:</strong></h1>
+        <table border = 1>
+            <tr>
+                <td><b>Inicial</b></td>
+                <td><b>Final  </b></td>
+                <td><b>Pattern</b></td>
+            </tr>
+            {% for i,f,s in found %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{f}}</td>
+                <td>{{s}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endblock %}
