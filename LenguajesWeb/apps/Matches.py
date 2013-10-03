@@ -13,8 +13,8 @@ def define_index(initial, final, lenght, diference):
 		final += diference
 	return (initial, final)
 
-def get_re_matches(re, text):
-	automata = create_AFND(re)
+def get_re_matches(atomaton, text):
+	automata = atomaton
 
 	states = []
 	#initial_index = 0

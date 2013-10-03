@@ -29,15 +29,16 @@ def error():
 def cosas():
     re = request.form['regex']
     text = request.form['text']
-    try:
-        found = get_re_matches(re, text)
-        State.id = 0
-        states = create_AFND(re).values()
-        simbols = get_simbols(states)
-        simbols.append(Global.epsilon)
-        return render_template('tabla.html',found=found, simbols=simbols, states=states, re=re)
-    except Exception, e:
-        return render_template('error.html',e=e)
+    #try:
+    State.id = 0
+    afnd = create_AFND(re)
+    states = sorted(afnd.values(), key = lambda s: int(s.name) if s.name != 's' and s.name != 'f' else -1)
+    simbols = get_simbols(states)
+    simbols.append(Global.epsilon)
+    found = get_re_matches(afnd, text)
+    return render_template('tabla.html',found=found, simbols=simbols, states=states, re=re)
+    #except Exception, e:
+    #    return render_template('error.html',e=e)
 
 if __name__ == '__main__':
     app.run()

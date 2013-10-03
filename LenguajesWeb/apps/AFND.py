@@ -27,6 +27,7 @@ def create_AFND(re):
 	s = State('s')
 	f = State('f')
 	automaton = {s.name: s, f.name: f}
+	#automaton = {s.name: s}
 
 	s.add_transition(initial_node, f);
 	deltas.append((s,initial_node))
@@ -37,29 +38,12 @@ def create_AFND(re):
 		if not origin in automaton.values():
 			automaton.setdefault(origin.name, origin)
 
-		if simbol.is_function:
+		if isinstance(simbol, ShuntingYard.Node):
 			aux_deltas = Thompson.generic(origin, simbol)
 			for t in aux_deltas:
 				deltas.insert(0, t)
-		else:
-			aux = origin.delete_transition(simbol)
-			for a in aux:
-				origin.add_transition(simbol.char, a)
-				#Descomentar la siguiente linea de codigo permite ver todas las transiciones generadas
-				#print origin, "--" + str(simbol.char) + "-->", a
-				#print origin, simbol, a
 
-	for state in automaton:
-		automaton[state].update_closure()
+	for state_name in automaton:
+		automaton[state_name].update_closure()
 
 	return automaton
-		
-"""
-r = "2*((01)*(0,&),(10)*(1,&))"
-#r = "(ab,c)*,(de+,fg*)+"
-#r = "a(b*)(c(d))"
-#r = "(a*)+**"
-automata = create_AFND(r)
-
-print check_string(automata, "	")
-"""

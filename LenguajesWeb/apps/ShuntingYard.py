@@ -17,9 +17,6 @@ class Node:
 		self.char = char
 		self.left = left
 		self.right = right
-		self.is_function = False
-		if char in Global.all_token_function.values():
-			self.is_function = True
 
 	def __str__(self):
 		s = ""
@@ -44,7 +41,7 @@ def create_tree(rpn):
 				raise SyntaxError('Faltan operandos')
 			pila.append(Node(token,pila.pop()))
 		else:
-			pila.append(Node(token))
+			pila.append(token)
 	if len(pila) > 1:
 		SyntaxError('Faltan operandos')
 	return pila.pop()
@@ -104,5 +101,18 @@ def to_rpn(tokens):
 		raise SyntaxError('Parentesis incompletos')
 	while len(pila) != 0:
 		cola.append(pila.pop())
+	eliminate_redundancy(cola)
 	return cola
 
+def eliminate_redundancy(tokens_rpn):
+	i = 0
+	while i < len(tokens_rpn)-1:
+		if tokens_rpn[i] in Global.token_unary_function.values() and tokens_rpn[i+1] in Global.token_unary_function.values():
+			if tokens_rpn[i] == Global.all_token_function['Closure']:
+				tokens_rpn.pop(i+1)
+			elif tokens_rpn[i+1] == Global.all_token_function['Closure']:
+				tokens_rpn.pop(i)
+			else:
+				tokens_rpn.pop(i)
+			i-=1
+		i+=1

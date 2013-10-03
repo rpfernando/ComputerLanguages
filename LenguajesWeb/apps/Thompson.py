@@ -22,21 +22,16 @@ class Thompson:
 		aux_destination = origin.delete_transition(tree)
 
 		aux_state1 = State()
-		aux_state2 = State()
-		aux_epsilon_node = ShuntingYard.Node(Global.epsilon)
 
-		origin.add_transition(aux_epsilon_node,aux_state1)
-		list_to_return.append((origin, aux_epsilon_node))
+		origin.add_transition(tree.left, aux_state1)
+		list_to_return.append((origin, tree.left))
 
-		aux_state2.add_transition(aux_epsilon_node,aux_state1)
-		list_to_return.append((aux_state2, aux_epsilon_node))
+		aux_state1.add_transition(Global.epsilon, origin)
+		list_to_return.append((aux_state1, Global.epsilon))
 
 		for d in aux_destination:
-			aux_state2.add_transition(aux_epsilon_node,d)
-			origin.add_transition(aux_epsilon_node, d)
-
-		aux_state1.add_transition(tree.left, aux_state2)
-		list_to_return.append((aux_state1, tree.left))
+			origin.add_transition(Global.epsilon, d)
+			aux_state1.add_transition(Global.epsilon, d)
 
 		return list_to_return
 
@@ -47,20 +42,15 @@ class Thompson:
 		aux_destination = origin.delete_transition(tree)
 
 		aux_state1 = State()
-		aux_state2 = State()
-		aux_epsilon_node = ShuntingYard.Node(Global.epsilon)
 
-		origin.add_transition(aux_epsilon_node,aux_state1)
-		list_to_return.append((origin, aux_epsilon_node))
+		origin.add_transition(tree.left, aux_state1)
+		list_to_return.append((origin, tree.left))
 
-		aux_state2.add_transition(aux_epsilon_node,aux_state1)
-		list_to_return.append((aux_state2, aux_epsilon_node))
+		aux_state1.add_transition(Global.epsilon, origin)
+		list_to_return.append((aux_state1, Global.epsilon))
 
 		for d in aux_destination:
-			aux_state2.add_transition(aux_epsilon_node,d)
-
-		aux_state1.add_transition(tree.left, aux_state2)
-		list_to_return.append((aux_state1, tree.left))
+			aux_state1.add_transition(Global.epsilon, d)
 
 		return list_to_return
 

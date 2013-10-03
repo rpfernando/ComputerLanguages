@@ -28,6 +28,7 @@ class State:
 		for s1 in self.closure:
 			if s1 != self:
 				s1.update_closure()
+				#s1.extended_delta(Global.epsilon)
 			for s2 in s1.closure:
 				if not s2 in self.closure:
 					self.closure.append(s2)
@@ -53,9 +54,6 @@ class State:
 			return []
 
 	def extended_delta(self, simbol):
-		if simbol == Global.epsilon:
-			return self.closure
-
 		l = []
 		for state in self.closure:
 			l += state.delta(simbol)
