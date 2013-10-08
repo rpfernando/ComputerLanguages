@@ -22,16 +22,19 @@ class Thompson:
 		aux_destination = origin.delete_transition(tree)
 
 		aux_state1 = State()
+		aux_state2 = State()
 
-		origin.add_transition(tree.left, aux_state1)
-		list_to_return.append((origin, tree.left))
+		origin.add_transition(Global.epsilon, aux_state1)
 
-		aux_state1.add_transition(Global.epsilon, origin)
-		list_to_return.append((aux_state1, Global.epsilon))
+		aux_state2.add_transition(Global.epsilon, aux_state1)
+		list_to_return.append((aux_state2, Global.epsilon))
 
 		for d in aux_destination:
+			aux_state2.add_transition(Global.epsilon, d)
 			origin.add_transition(Global.epsilon, d)
-			aux_state1.add_transition(Global.epsilon, d)
+
+		aux_state1.add_transition(tree.left, aux_state2)
+		list_to_return.append((aux_state1, tree.left))
 
 		return list_to_return
 
@@ -42,15 +45,18 @@ class Thompson:
 		aux_destination = origin.delete_transition(tree)
 
 		aux_state1 = State()
+		aux_state2 = State()
 
-		origin.add_transition(tree.left, aux_state1)
-		list_to_return.append((origin, tree.left))
+		origin.add_transition(Global.epsilon, aux_state1)
 
-		aux_state1.add_transition(Global.epsilon, origin)
-		list_to_return.append((aux_state1, Global.epsilon))
+		aux_state2.add_transition(Global.epsilon, aux_state1)
+		list_to_return.append((aux_state2, Global.epsilon))
 
 		for d in aux_destination:
-			aux_state1.add_transition(Global.epsilon, d)
+				aux_state2.add_transition(Global.epsilon, d)
+
+		aux_state1.add_transition(tree.left, aux_state2)
+		list_to_return.append((aux_state1, tree.left))
 
 		return list_to_return
 

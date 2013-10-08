@@ -34,16 +34,16 @@ def create_tree(rpn):
 	for token in rpn:
 		if token in Global.token_function.values():
 			if len(pila) < 2:
-				raise SyntaxError('Faltan operandos')
+				raise SyntaxError('Missing Operands')
 			pila.append(Node(token,pila.pop(),pila.pop()))
 		elif token in Global.token_unary_function.values():
 			if len(pila) < 1:
-				raise SyntaxError('Faltan operandos')
+				raise SyntaxError('Missing Operands')
 			pila.append(Node(token,pila.pop()))
 		else:
 			pila.append(token)
 	if len(pila) > 1:
-		SyntaxError('Faltan operandos')
+		SyntaxError('Missing Operands')
 	return pila.pop()
 
 	# Metod used to change the string to a list and introduct a concatenation operator.
@@ -89,7 +89,7 @@ def to_rpn(tokens):
 				pila.append(t)
 			else:
 				if not Global.token_separator['Opening'] in pila:
-					raise SyntaxError('Parentesis incompletos')
+					raise SyntaxError('Missing bracket')
 				while pila[-1] != Global.token_separator['Opening']:
 					cola.append(pila.pop())
 				pila.pop()
@@ -98,7 +98,7 @@ def to_rpn(tokens):
 			cola.append(t)
 		#Checks that the stack is empty.
 	if Global.token_separator['Opening'] in pila:
-		raise SyntaxError('Parentesis incompletos')
+		raise SyntaxError('Missing bracket')
 	while len(pila) != 0:
 		cola.append(pila.pop())
 	eliminate_redundancy(cola)

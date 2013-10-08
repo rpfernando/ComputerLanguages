@@ -26,9 +26,6 @@ class State:
 
 	def update_closure(self):
 		for s1 in self.closure:
-			if s1 != self:
-				s1.update_closure()
-				#s1.extended_delta(Global.epsilon)
 			for s2 in s1.closure:
 				if not s2 in self.closure:
 					self.closure.append(s2)
@@ -61,7 +58,7 @@ class State:
 		for state in l:
 			closure_l += state.closure
 
-		return closure_l		
+		return sorted(list(set(closure_l)), key = lambda s: int(s.name) if s.name != 's' and s.name != 'f' else -1)
 
 	def __str__(self):
 		return "State: " + self.name + "."
