@@ -5,10 +5,15 @@
     {% endblock %}
 
 	{% block content %}
+		<div class="row">
+		<br>
+		<br>
+		<br>
 			{% if e %}
-				<h1 style = "text-align:center; color:red;" > Error:  </h1>
-				<h2 style = "text-align:center;"> {{ e }} </h2>
-			{%else%}
-				<h2 style = "text-align:center;"> There has beeen a mistake please go back </h2>
+				<h1 style = "color:#c0392b;" > Error: </h1>
+				<h2> {{ e }} </h2>
+			{% else %}
+				<h2> There has been a mistake please go back </h2>
 			{% endif %}
+		</div>
 	{% endblock %}

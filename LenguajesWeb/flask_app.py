@@ -10,10 +10,8 @@ app.config["DEBUG"] = True
 def get_simbols(states):
     simbols = []
     for s in states:
-        for k in s.transitions.keys():
-            if not k in simbols:
-                simbols.append(k)
-    return simbols
+        simbols += s.transitions.keys()
+    return sorted(list(set(simbols)))
 
 
 @app.route('/')
@@ -34,6 +32,7 @@ def cosas():
         afnd = create_AFND(re)
         states = sorted(afnd.values(), key = lambda s: int(s.name) if s.name != 's' and s.name != 'f' else -1)
         simbols = get_simbols(states)
+        #print simbols
         #simbols.append(Global.epsilon)
         found = get_re_matches(afnd, text)
         return render_template('tabla.html',found=found, simbols=simbols, states=states, re=re)

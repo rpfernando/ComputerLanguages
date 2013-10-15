@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+
+	{% block title %}
+        
+    {% endblock %}
+
 	{% block content %}
-		<form id = "info" method="post" action="/tables">
-			<input type="submit" class = "center-title" value="Regular Expresion">
-			<br>
-			<input id ="re-text" class = "re" type = "text" required name="regex">
-			<br>
-			<br>
-			<textarea id = "document-text" name="text"></textarea>	
-			<br>
-			<br>
-		</form>
-	{% endblock %}		
+		<div class="row">
+			<h1 class="lead">Regular Expresion</h1>
+			<form id="info" method="post" action="/tables">
+				<ul>
+					<li class="append field">
+						<input id="border" class="normal text input" type="text"  name="regex" required placeholder="Regex"></input>
+						<div class="medium primary btn"> <input type="submit" value="Go"></div>
+						<p> Simbols: closure '*', positive closure '+', union ',' and epsilon '&amp;'. </p>
+					</li>
+					<li class="field">
+						<textarea id="border-area" class="input textarea" rows="12" name="text" placeholder="Text"></textarea>
+					</li>
+				</ul>
+			</form>
+		</div>
+	{% endblock %}

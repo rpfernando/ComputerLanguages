@@ -2,13 +2,14 @@
     <head>
         <title>Regular Expresions{% block title %}{% endblock %}</title>
         <meta charset = "UTF-8" >
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/basic.css') }}" media="all">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/gumby.css') }}" media="all">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="all">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/hat.ico') }}" type="image/x-icon" >
     </head>
     <body>
-        <img src="{{ url_for('static', filename='img/background_verde.png') }}">
-        <article>
-            {% block content %}{% endblock %}
-        </article>
+        {% block content %}{% endblock %}
+        <div class="row">
+            <p id="right">By: <a id="color" href="https://github.com/artur34">artur34</a> | <a id="color" href="https://github.com/CuRy">CuRy</a> | <a id="color" href="https://github.com/luis9528">luis9528</a> | <a id="color" href="https://github.com/rpfernando">rpfernando</a></p>             
+        </div>
     </body>
 </html>

@@ -1,0 +1,47 @@
+/*
+ *colors from: http://www.colorcombos.com/color-schemes/107/ColorCombo107.html;
+ */
+
+img.background {
+    display: block;
+    position: fixed;
+    width: 300px;
+    margin-left: -30px;
+    margin-top: -10px;
+}
+
+body {
+    background: #ecf0f1;
+}
+
+h1 {
+    color: #000044;
+}
+
+h2, h3 {
+    color: #112266;
+}
+
+h3.regex {
+	position: relative;
+	margin-left: 10%;
+}
+
+#border, #border-area {
+    border-width: 3px;
+    border-color: #9BA1A5;
+    padding: 1px;
+}
+
+#border-area {
+     border-radius: 15px;
+     padding: 5px;
+}
+
+#right {
+    text-align: right;
+}
+
+#color {
+    color: #101010;
+}

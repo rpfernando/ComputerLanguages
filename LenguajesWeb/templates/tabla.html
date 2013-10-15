@@ -5,50 +5,67 @@
     {% endblock %}
 
     {% block content %}
-        <h1><strong>Regular Expresion:</strong> {{re}}</h1>
+        <div class="row">
+            <h1 class="lead">Regular Expresion</h1>
+            <h3 class="regex">{{re}}</h3>
+            
 
-        <h1><strong>Transitions:</strong></h1>
-        <table border = 1>
-            <tr>
-                <td><b>State</b></td>
-                {% for i in simbols %}
-                <td><b>{{i}}</b></td>
-                {% endfor %}
-            </tr>
-            {% for s in states: %}
-            <tr>
-                <td>{{s.name}}</td>
-                {% for i in simbols %}
-                    <td> {% for k in s.delta(i) %}
-                            {{k.name}},&#32;
-                         {% endfor %}
-                    </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </table>
+            <div class="row">
+                <h2>Transitions:</h2>
+                <div class="twelve columns">
+                    <table class="striped rounded">
+                        <thead>
+                            <tr>
+                                <td><b>State</b></td>
+                                {% for i in simbols %}
+                                    <td><b>{{i}}</b></td>
+                                {% endfor %}
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            {% for s in states: %}
+                            <tr>
+                                <td>{% if states[1].name == 'f' and states[1] in s.closure %}*{% endif %}
+                                    {% if states[0].name == 'f' and states[0] in s.closure %}*{% endif %}
+                                    {{s.name}}</td>
+                                {% for i in simbols %}
+                                    <td> {% for k in s.extended_delta(i) %}
+                                            {{k.name}},&#32;
+                                        {% endfor %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <p>*: final states.</p>
+                </div>
+            </div>
 
-        <h1><strong>Matches:</strong></h1>
-        <table border = 1>
-            <tr>
-                <td><b>Inicial</b></td>
-                <td><b>Final  </b></td>
-                <td><b>Pattern</b></td>
-            </tr>
-            {% for i,f,s in found %}
-            <tr>
-                <td>{{i}}</td>
-                <td>{{f}}</td>
-                <td>{{s}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+            <div class="row">
+                <h2>Matches:</h2>
+                <div class="twelve columns">
+                    <table class="streped rounded">
+                        <thead>
+                            <tr>
+                                <td><b>Initial</b></td>
+                                <td><b>Final  </b></td>
+                                <td><b>Pattern</b></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i,f,s in found %}
+                            <tr>
+                                <td>{{i+1}}</td>
+                                <td>{{f}}</td>
+                                <td>{{s}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
     {% endblock %}
