@@ -5,8 +5,8 @@
     {% endblock %}
 
     {% block content %}
+        <div class="row"><h1 class="lead">Regular Expresion</h1></div>
         <div class="row">
-            <h1 class="lead">Regular Expresion</h1>
             <h3 class="regex">{{re}}</h3>
             
 
@@ -48,17 +48,19 @@
                     <table class="streped rounded">
                         <thead>
                             <tr>
-                                <td><b>Initial</b></td>
-                                <td><b>Final  </b></td>
-                                <td><b>Pattern</b></td>
+                                <td>Initial</td>
+                                <td>Final  </td>
+                                <td>Pattern</td>
+                                <td>Highlight</td>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for i,f,s in found %}
+                            {% for i,f in found %}
                             <tr>
                                 <td>{{i+1}}</td>
                                 <td>{{f}}</td>
-                                <td>{{s}}</td>
+                                <td>{{text[i:f]}}</td>
+                                <td>{% if i-ctx > 0 %}{{text[i-ctx:i]}}{% else %}{{text[0:i]}}{% endif %}<strong>{{text[i:f]}}</strong>{{text[f:f+ctx]}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

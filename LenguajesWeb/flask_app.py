@@ -35,7 +35,8 @@ def cosas():
         #print simbols
         #simbols.append(Global.epsilon)
         found = get_re_matches(afnd, text)
-        return render_template('tabla.html',found=found, simbols=simbols, states=states, re=re)
+        found = sorted(found, key = lambda l: l[0])
+        return render_template('tabla.html',found=found, simbols=simbols, states=states, re=re, text=text, ctx=10)
     except Exception, e:
         return render_template('error.html',e=e)
 

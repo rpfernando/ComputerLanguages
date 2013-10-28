@@ -22,7 +22,8 @@ def get_re_matches(atomaton, text):
 	list_of_matches = []
 
 	automata['s'].index = [0]
-	states = automata['s'].extended_delta(Global.epsilon)
+	states = list(set(automata['s'].extended_delta(Global.epsilon)))
+
 
 	for index in range(len(text)):
 		states = state_list_delta(states, text[index])
@@ -30,9 +31,8 @@ def get_re_matches(atomaton, text):
 		states.append(automata['s'])
 		if automata['f'] in states: 
 			for i in automata['f'].index:
-				list_of_matches.append((i, index+1, text[i:index+1]))
-		for s in states:
-			print s,
-		print 
+				list_of_matches.append((i, index+1))
+			automata['f'].index = []
+			states.pop(states.index(automata['f']))
 		
 	return list_of_matches
