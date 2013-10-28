@@ -1,17 +1,16 @@
 from AFND import *
 from Global import *
 
-def define_index(initial, final, lenght, diference):
-	if initial - diference < 0:
-		initial = 0
-	else:
-		initial -= diference
+def state_list_delta(list_of_states, simbol):
+	list_to_return = []
 
-	if final + diference >= lenght:
-		final  = lenght
-	else:
-		final += diference
-	return (initial, final)
+	for state in list_of_states:	
+		aux = state.extended_delta(simbol)
+		for s in aux:
+			if not s in list_to_return:
+				list_to_return.append(s)
+
+	return list_to_return
 
 def get_re_matches(atomaton, text):
 	automata = atomaton
@@ -22,16 +21,18 @@ def get_re_matches(atomaton, text):
 
 	list_of_matches = []
 
+	automata['s'].index = [0]
+	states = automata['s'].extended_delta(Global.epsilon)
+
 	for index in range(len(text)):
-		initial_index = index
-		final = index
-		states = automata['s'].closure
-		while len(states) > 0:
-			if final == len(text):
-				break
-			states = state_list_delta(states, text[final])
-			final += 1
-			if automata['f'] in states:
-				list_of_matches.append((initial_index, final, text[initial_index:final]))
+		states = state_list_delta(states, text[index])
+		automata['s'].index = [index+1]
+		states.append(automata['s'])
+		if automata['f'] in states: 
+			for i in automata['f'].index:
+				list_of_matches.append((i, index+1, text[i:index+1]))
+		for s in states:
+			print s,
+		print 
 		
 	return list_of_matches

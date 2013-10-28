@@ -3,17 +3,20 @@ import ShuntingYard
 
 class State:
 	#Counts the number of states created and also allows you to name a state automaticaly.
-	id = 0 
-
+	id = 0
+	
 	def __init__(self, name=None):
 		if name != None:
 			self.name = name
 		else:
 			self.name = str(State.id)
 			State.id += 1
+
 		self.closure = []
 		self.add_to_closure(self)
 		self.transitions = dict() 
+		self.index = []
+
 
 	#Instead of adding an epsilon transition add it to the closure.
 	def add_to_closure(self, state):
@@ -58,7 +61,14 @@ class State:
 		for state in l:
 			closure_l += state.closure
 
-		return sorted(list(set(closure_l)), key = lambda s: int(s.name) if s.name != 's' and s.name != 'f' else -1)
+		aux = self.index
+		self.index = []
+		for s in closure_l:
+			s.index += aux
+			s.index = list(set(s.index))
+
+		#return sorted(list(set(closure_l)), key = lambda s: int(s.name) if s.name != 's' and s.name != 'f' else -1)
+		return closure_l
 
 	def __str__(self):
-		return "State: " + self.name + "."
+		return "State: " + self.name + str(self.index) +"."

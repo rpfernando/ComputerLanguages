@@ -2,17 +2,6 @@ from Global import *
 import ShuntingYard
 from Thompson import *
 
-def state_list_delta(list_of_states, simbol):
-	list_to_return = []
-
-	for state in list_of_states:	
-		aux = state.extended_delta(simbol)
-		for s in aux:
-			if not s in list_to_return:
-				list_to_return.append(s)
-
-	return list_to_return
-
 def check_string(automaton, word):
 	inicial = automata['s'].closure
 	for i in word:
