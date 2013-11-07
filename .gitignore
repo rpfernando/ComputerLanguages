@@ -1,0 +1,7 @@
+*.py[cod]
+*.esproj
+*.DS_Store
+gamificationdb.sqlite
+*.sqlite
+gamification/media/*
+run.sh
