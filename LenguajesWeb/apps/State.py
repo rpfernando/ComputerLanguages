@@ -32,6 +32,7 @@ class State:
 			for s2 in s1.closure:
 				if not s2 in self.closure:
 					self.closure.append(s2)
+		self.closure = list(set(self.closure))
 
 	def delete_transition(self, simbol):
 		return self.transitions.pop(simbol)
@@ -78,4 +79,4 @@ class State:
 		return closure_l
 
 	def __str__(self):
-		return "State: " + self.name + str(self.index) +"."
+		return "State: " + self.name + "."

@@ -47,12 +47,18 @@ class State:
 					self.transitions.setdefault(simbol, []).append(destination)
 
 	def delta(self, simbol):
+		comodin = []
+		try:
+			comodin = self.transitions[Global.comodin_token]
+		except Exception, e:
+			comodin = []
+
 		if simbol == Global.epsilon:
 			return self.closure
 		try:
-			return self.transitions[simbol]
+			return list(set(self.transitions[simbol] + comodin))
 		except Exception, e:
-			return []
+			return comodin
 
 	def extended_delta(self, simbol):
 		l = []
