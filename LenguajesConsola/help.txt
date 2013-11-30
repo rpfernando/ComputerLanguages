@@ -1,2 +1,27 @@
-Esta es la ayuda
-jajaja (:
+The objective of this app is to look for in a group of file matches of a regex provided.
+
+Available commands:
+? -o creats a file named 'output.txt' with the results of the search.
+? -a shows the automaton.
+? -oa creats a file named 'outputt.txt' with the generated automaton.
+? -h shows help.
+
+Example input:
+
+-e 'ab(b,aa)*c+(.)*d' file1[,file2,file3,filen] [–o][-a][-oa][-h] 
+-h [-e 'ab(b,aa)*c+(.)*d' file1[,file2,file3,filen]] [–o][-a][-oa]
+
+Note
+The regex will be entered in quotes.
+Reading files must be plain text.
+
+
+Aplication name: orkomaton
+ver: 2.3
+Date 2013-1-12
+
+Developers:
+Fernando Padilla Rubio
+Iván Alejandro Rojas Molina
+Luis Ramos Rangel
+Arturo Mendez del Villar

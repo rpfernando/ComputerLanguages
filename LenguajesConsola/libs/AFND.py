@@ -2,6 +2,8 @@ from Global import *
 import ShuntingYard
 from Thompson import *
 
+from texttable import Texttable
+
 class AFND:
 	def __init__(self, re):
 		self.re = re
@@ -64,5 +66,28 @@ class AFND:
 			
 		return list_of_matches
 
+	def get_simbols(self):
+	    simbols = []
+	    for s in self.states.values():
+	        simbols += s.transitions.keys()
+	    return sorted(list(set(simbols)))
+
 	def __str__(self):
-		return str(self.states)
+		table = Texttable()
+		states = sorted(self.states.values(), key = lambda s: int(s.name) if s.name != 's' and s.name != 'f' else -1)
+		simbols = self.get_simbols()
+		rows = [['State'] + simbols]
+		for s in states:
+			rows.append([])
+			if self.f in s.closure:
+				rows[-1].append('*' + s.name)
+			else:
+				rows[-1].append(s.name)
+			for i in simbols:
+				cosa = ""
+				for k in s.extended_delta(i):
+					cosa += k.name + ', '
+				rows[-1].append(cosa)
+		table.set_cols_align(['c'] * len(rows[0]))
+		table.add_rows(rows)
+		return table.draw()
