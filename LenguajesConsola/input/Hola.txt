@@ -4,3 +4,24 @@ holaaaa
 hhhhola
 hola 
 adios
+
+
+aLowPass = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+bLowPass = [0x113, 0x1ad, 0x364, 0x604, 0x91d, 0xc2c, 0xe9a, 0xff2, 0xff2, 0xe9a, 0xc2c, 0x91d, 0x604, 0x364, 0x1ad, 0x113]
+
+aHighPass = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+bHighPass = [0x5f, 0x8c, 0x113, 0x1e4, 0x2e4, 0x3ed, 0x4d3, 0x56d, 0x7ab6, 0x56d, 0x4d3, 0x3ed, 0x2e4, 0x1e4, 0x113, 0x8c, 0x5f]
+
+
+
+>> h=fir1(16,.044,'high')
+
+h =
+
+Columns 1 through 11
+
+-0.0029 -0.0043 -0.0084 -0.0148 -0.0226 -0.0307 -0.0377 -0.0424 0.9587 -0.0424 -0.0377
+
+Columns 12 through 17
+
+-0.0307 -0.0226 -0.0148 -0.0084 -0.0043 -0.0029

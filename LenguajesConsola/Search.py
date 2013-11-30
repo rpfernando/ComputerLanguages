@@ -2,19 +2,55 @@
 import sys
 from libs.AFND import *
 from libs.Matches import *
+import libs.cons as cons
 
 OPTIONS = ['-h', '-e', '-a', '-oa', '-o']
 automaton = None
 files = None
 matches = []
+output_html = ""
+
+def hilite(string):
+    attr = ['32','1']
+    return '\\e[31m%s\e[0m' % (string)
+    #return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
 
 def str_matches_by_line():
-	global matches
-	return str(matches)
+	global matches, files
+	bounds = []
+	s = ""
+	for f in files:
+		bounds.append([])
+		of = open(f,'r').read()
+		index = of.find('\n')
+		while index != -1:
+			bounds[-1].append(index)
+			index = of.find('\n', index + 1)
+		bounds[-1].append(len(of))
+	for match, bound, f in zip(matches, bounds, files):
+		of = open(f,'r').read()
+		index = f.rfind('/') + 1
+		for x, y in match:
+			for line, b in enumerate(bound):
+				if b >= x:
+					cosa = f[index:] + '; line ' + str(line + 1) + ': ' + of[bound[line - 1] + 1 :x]
+					sys.stdout.write(cosa)
+   					sys.stdout.flush()
+					cons.set_text_attr(cons.FOREGROUND_BLUE)
+					cosa = of[x:y]
+					sys.stdout.write(cosa)
+   					sys.stdout.flush()
+					cons.set_text_attr(cons.FOREGROUND_GREY)
+					cosa = of[y:b]
+					sys.stdout.write(cosa)
+   					sys.stdout.flush()
+					print
+					s += f[index:] + '; line ' + str(line + 1) + ': ' + of[bound[line - 1] + 1 :x] + '<b>' + of[x:y] + '</b>' + of[y:b] + '<br>'
+					break
+	return s
 
 def check_or_create_atomaton(args):
-	global automaton
-	global files
+	global automaton, files
 	if automaton != None:
 		return
 	
@@ -36,15 +72,15 @@ def check_or_get_matches():
 def option_select(opt, args):
 	if opt == '-h':
 		print open('help.txt').read()
-	global automaton, files
+	global automaton, files, output_html
 	if opt == '-a':
 		check_or_create_atomaton(args)
 		print automaton
 	if opt == '-o':
 		check_or_create_atomaton(args)
-		output = open('output/output.txt', 'w')
+		output = open('output/output.html', 'w')
 		check_or_get_matches()
-		output.write(str_matches_by_line())
+		output.write(output_html)
 	if opt == '-oa':
 		check_or_create_atomaton(args)
 		ouputt = open('output/outputt.txt', 'w')
@@ -52,7 +88,7 @@ def option_select(opt, args):
 	if opt == '-e':
 		check_or_create_atomaton(args)
 		check_or_get_matches()
-		print str_matches_by_line()
+		output_html = str_matches_by_line()
 
 
 if __name__=='__main__':
