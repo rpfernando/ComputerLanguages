@@ -10,11 +10,6 @@ files = None
 matches = []
 output_html = ""
 
-def hilite(string):
-    attr = ['32','1']
-    return '\\e[31m%s\e[0m' % (string)
-    #return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
-
 def str_matches_by_line():
 	global matches, files
 	bounds = []
@@ -53,11 +48,13 @@ def check_or_create_atomaton(args):
 	global automaton, files
 	if automaton != None:
 		return
-	
-	index = args.index('-e')
-	if index == -1:
+
+	if not '-e' in args:
+		print
 		print 'Invalid args: Regex missing.'
 		sys.exit(2)
+
+	index = args.index('-e')
 
 	automaton = AFND(args[index + 1][1:-1])
 	files = args[index + 2].split(',')
